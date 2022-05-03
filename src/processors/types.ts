@@ -1,25 +1,12 @@
 import db from '../database';
 
 import { JsonFiles } from '../constants/JsonFiles';
+import { TypeData, TypeRelation } from '../types/Type';
 
 import { capitalise } from '../utils';
 import { readJsonFromFile } from '../utils/file';
 import { debug } from '../utils/logger';
 import { TypeRelationType } from '../constants/TypeRelationType';
-
-interface TypeData {
-  id: number;
-  name: string;
-  unaffectedBy: number[];
-  resists: number[];
-  weakTo: number[];
-}
-
-interface TypeRelation {
-  TypeId: number;
-  RelationType: number;
-  RelatedTypeId: number;
-}
 
 export default async function processor() {
   let data: TypeData[] = db.prepare(`SELECT * FROM Type`).all();
