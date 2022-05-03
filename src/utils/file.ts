@@ -1,8 +1,8 @@
 import fs from 'fs';
 
-export async function readJsonFromFile(filePath: string) {
-  const searilised = fs.readFileSync(filePath, 'utf8').toString();
-  return JSON.parse(searilised);
+export async function readJsonFromFile<T>(filePath: string) {
+  const stringy = fs.readFileSync(filePath, 'utf8').toString();
+  return JSON.parse(stringy) as T;
 }
 
 export async function writeTextToFile(fileName: string, text: string) {

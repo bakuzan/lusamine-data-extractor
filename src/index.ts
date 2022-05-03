@@ -5,6 +5,9 @@ import figlet from 'figlet';
 import { Option, program } from 'commander';
 
 import { Mode } from './constants/Mode';
+import { LDEOptions } from './constants/LDEOptions';
+
+import processor from './processors';
 import { enumValues } from './utils';
 
 async function run() {
@@ -23,6 +26,11 @@ async function run() {
       )
     )
     .parse(process.argv);
+
+  const options = program.opts() as LDEOptions;
+  await processor(options.mode);
+
+  console.log('Test: > ', options);
 }
 
 run();
