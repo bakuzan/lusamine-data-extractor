@@ -2,6 +2,7 @@ import { Mode } from '../constants/Mode';
 
 import processTypes from './types';
 import processPokemon from './pokemon';
+import processStarters from './starters';
 
 export default async function processor(mode: Mode) {
   switch (mode) {
@@ -10,6 +11,9 @@ export default async function processor(mode: Mode) {
       break;
     case Mode.ImportPokemon:
       await processPokemon();
+      break;
+    case Mode.ImportStarters:
+      await processStarters();
       break;
     default:
       throw new Error(

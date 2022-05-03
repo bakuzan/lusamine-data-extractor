@@ -47,7 +47,7 @@ export default async function processor() {
     insertPokemons(
       newPokemon.map((x) => ({
         NationalPokedexNumber: x.nationalPokedexNumber,
-        Name: capitalise(x.name),
+        Name: capitalise(x.name.trim()),
         GenerationId: getGeneration(x.nationalPokedexNumber)
       }))
     );
@@ -160,7 +160,7 @@ export default async function processor() {
         const result = insertForm.run({
           PokemonId: item.Id,
           InstanceType: poke.InstanceType,
-          Description: poke.Description || null,
+          Description: poke.Description?.trim() || null,
           RegionId: poke.RegionId || null
         });
 
