@@ -22,8 +22,11 @@ export default async function processor() {
 
   // Check and insert pokemon
   const newPokemon = pokeData.filter(
-    (x) =>
+    (x, i, a) =>
       x.form === '' &&
+      a.findIndex(
+        (y) => x.nationalPokedexNumber === y.nationalPokedexNumber
+      ) === i &&
       !pokemon.some((y) => x.nationalPokedexNumber === y.NationalPokedexNumber)
   );
 

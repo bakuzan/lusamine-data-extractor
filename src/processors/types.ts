@@ -15,6 +15,7 @@ export default async function processor() {
   // Check and insert types
   if (hasTypesAlready) {
     debug(`Database already contains pokemon types. Skipping Type inserts...`);
+    return;
   } else {
     data = await readJsonFromFile<TypeData[]>(JsonFiles.Types);
 

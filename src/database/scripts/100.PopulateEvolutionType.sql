@@ -1,4 +1,4 @@
-INSERT OR REPLACE INTO FormType (Id, Name)
+INSERT OR REPLACE INTO EvolutionType (Id, Name)
 VALUES (1, 'Leveling')
       ,(2, 'Leveling with High Friendship')
       ,(3, 'Leveling with Move')

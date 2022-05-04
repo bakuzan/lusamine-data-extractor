@@ -9,11 +9,16 @@ import { LDEOptions } from './constants/LDEOptions';
 
 import processor from './processors';
 import { enumValues } from './utils';
+import { debug } from './utils/logger';
 
 async function run() {
   console.log(
     chalk.green(
-      figlet.textSync('Lusamine Data Extractor', { horizontalLayout: 'full' })
+      figlet.textSync('Lusamine Data Extractor', {
+        horizontalLayout: 'full',
+        width: process.stdout.columns,
+        whitespaceBreak: true
+      })
     )
   );
 
@@ -30,7 +35,7 @@ async function run() {
   const options = program.opts() as LDEOptions;
   await processor(options.mode);
 
-  console.log('Test: > ', options);
+  debug(`Process Complete.`);
 }
 
 run();

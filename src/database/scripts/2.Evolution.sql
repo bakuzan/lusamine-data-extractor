@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Form(
+CREATE TABLE IF NOT EXISTS Evolution(
     "Id"                    INTEGER      NOT NULL UNIQUE, 
     "PokemonId"             INTEGER      NOT NULL, 
     "EvolvesToPokemonId"    INTEGER      NOT NULL, 
