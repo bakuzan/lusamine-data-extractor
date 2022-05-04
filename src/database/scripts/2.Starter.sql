@@ -1,2 +1,3 @@
 CREATE TABLE IF NOT EXISTS Starter(
-    "PokemonId" INTEGER NOT NULL UNIQUE);
+    "PokemonId" INTEGER NOT NULL UNIQUE,
+	FOREIGN KEY("PokemonId")     REFERENCES "Pokemon"("Id"));
