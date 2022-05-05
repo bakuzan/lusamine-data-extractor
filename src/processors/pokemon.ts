@@ -15,6 +15,7 @@ import { capitalise } from '../utils';
 import { readJsonFromFile } from '../utils/file';
 import { debug } from '../utils/logger';
 import getGeneration from '../utils/getGeneration';
+import resolvePokemonFormInformation from '../utils/resolvePokemonFormInfo';
 
 export default async function processor() {
   debug(`Processing pokemon...`);
@@ -87,7 +88,7 @@ export default async function processor() {
         PokemonId: null,
         InstanceType:
           x.form === '' ? FormInstanceType.Base : FormInstanceType.Alternate,
-        Description: x.form,
+        Description: resolvePokemonFormInformation(x),
         RegionId: null,
         TypeIds: x.typeIds
       }))

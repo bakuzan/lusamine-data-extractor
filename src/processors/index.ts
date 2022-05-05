@@ -3,6 +3,7 @@ import { Mode } from '../constants/Mode';
 import processTypes from './types';
 import processPokemon from './pokemon';
 import processStarters from './starters';
+import processEvolutions from './evolutions';
 
 export default async function processor(mode: Mode) {
   switch (mode) {
@@ -15,9 +16,18 @@ export default async function processor(mode: Mode) {
     case Mode.ImportStarters:
       await processStarters();
       break;
+    case Mode.ImportEvolutions:
+      await processEvolutions();
+      break;
+    case Mode.ImportAll:
+      await processTypes();
+      await processPokemon();
+      await processStarters();
+      await processEvolutions();
+      break;
     default:
       throw new Error(
-        `No implementation for Mode : ${mode.toString()} was found.`
+        `No implementation for Mode : ${(mode as Mode).toString()} was found.`
       );
   }
 }
