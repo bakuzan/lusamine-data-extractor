@@ -17,13 +17,14 @@ import { debug } from '../utils/logger';
 import getGeneration from '../utils/getGeneration';
 
 export default async function processor() {
+  debug(`Processing pokemon...`);
+
   const pokemon: PokemonData[] = db.prepare(`SELECT * FROM Pokemon`).all();
   const pokeData = await readJsonFromFile<PokemonJsonData[]>(JsonFiles.Pokemon);
 
   // Check and insert pokemon
   const newPokemon = pokeData.filter(
     (x, i, a) =>
-      x.form === '' &&
       a.findIndex(
         (y) => x.nationalPokedexNumber === y.nationalPokedexNumber
       ) === i &&

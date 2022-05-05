@@ -9,6 +9,8 @@ import { debug } from '../utils/logger';
 import { TypeRelationType } from '../constants/TypeRelationType';
 
 export default async function processor() {
+  debug(`Processing types...`);
+
   let data: TypeData[] = db.prepare(`SELECT * FROM Type`).all();
   const hasTypesAlready = data.length > 0;
 
