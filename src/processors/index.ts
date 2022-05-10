@@ -4,6 +4,7 @@ import processTypes from './types';
 import processPokemon from './pokemon';
 import processStarters from './starters';
 import processEvolutions from './evolutions';
+import processPokedexes from './pokedexes';
 
 export default async function processor(mode: Mode) {
   switch (mode) {
@@ -19,11 +20,15 @@ export default async function processor(mode: Mode) {
     case Mode.ImportEvolutions:
       await processEvolutions();
       break;
+    case Mode.ImportPokedexes:
+      await processPokedexes();
+      break;
     case Mode.ImportAll:
       await processTypes();
       await processPokemon();
       await processStarters();
       await processEvolutions();
+      await processPokedexes();
       break;
     default:
       throw new Error(

@@ -7,6 +7,7 @@ export interface PokemonData {
 }
 
 export interface PokemonFormData {
+  Id: number;
   NationalPokedexNumber: number;
   PokemonId: number;
   InstanceType: FormInstanceType;
