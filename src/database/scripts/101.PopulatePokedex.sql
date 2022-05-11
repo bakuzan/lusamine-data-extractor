@@ -1,4 +1,4 @@
-INSERT OR REPLACE INTO Region (Id, Code, Name, RegionId)
+INSERT OR REPLACE INTO Pokedex (Id, Code, Name, RegionId)
 VALUES (1, 'national', 'National', NULL)
       ,(2, 'kanto', 'Kanto', 1)
       ,(3, 'new', 'New', 2)
@@ -16,4 +16,4 @@ VALUES (1, 'national', 'National', NULL)
       ,(15, 'alola_u', 'Alola Ultra', 7)
       ,(16, 'galar', 'Galar', 8)
       ,(17, 'galar_isle_of_armor', 'Galar Isle of Armour', 8)
-      ,(18, 'galar_crown_tundra', 'Galar Crown Tundra', 8)
+      ,(18, 'galar_crown_tundra', 'Galar Crown Tundra', 8);

@@ -12,7 +12,7 @@ export interface PokedexForm {
 }
 
 export interface PokedexLinkJson {
-  regionId: number;
+  region: number;
   regionalPokedexNumber: number;
   nationalPokedexNumber: number;
   formSuffix: string;

@@ -17,12 +17,12 @@ export enum PokedexJsonFiles {
   SinnohPlatinum = 'sinnoh_pt.json',
   Unova = 'unova.json',
   UnovaNew = 'unova_n.json',
-  KalosCentral = 'kalos_ce',
-  KalosCoastal = 'kalos_co',
-  KalosMountain = 'kalos_mo',
-  Alola = 'alola',
-  AlolaUltra = 'alola_u',
-  Galar = 'galar',
-  GalarIsleOfArmour = 'galar_isle_of_armor',
-  GalarCrownTundra = 'galar_crown_tundra'
+  KalosCentral = 'kalos_ce.json',
+  KalosCoastal = 'kalos_co.json',
+  KalosMountain = 'kalos_mo.json',
+  Alola = 'alola.json',
+  AlolaUltra = 'alola_u.json',
+  Galar = 'galar.json',
+  GalarIsleOfArmour = 'galar_isle_of_armor.json',
+  GalarCrownTundra = 'galar_crown_tundra.json'
 }

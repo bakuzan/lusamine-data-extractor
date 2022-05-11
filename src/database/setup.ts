@@ -5,7 +5,9 @@ const targetFolder = 'src/database/scripts';
 
 export function readSQLFiles() {
   try {
-    const filenames = fs.readdirSync(targetFolder);
+    const filenames = fs
+      .readdirSync(targetFolder)
+      .sort((a, b) => b.localeCompare(a));
 
     return filenames
       .filter((x) => x.endsWith('sql'))

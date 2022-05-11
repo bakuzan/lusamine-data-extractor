@@ -1,13 +1,14 @@
 import db from '../database';
 
 import { PokedexJsonFiles } from '../constants/JsonFiles';
-import { FormInstanceType } from '../constants/FormInstanceType';
+
+import { PokemonFormData } from '../types/Pokemon';
+import { Pokedex, PokedexForm, PokedexLinkJson } from '../types/Pokedex';
 
 import { readJsonFromFile } from '../utils/file';
 import { debug } from '../utils/logger';
 import { enumValues } from '../utils';
-import { PokemonFormData } from '../types/Pokemon';
-import { Pokedex, PokedexForm, PokedexLinkJson } from '../types/Pokedex';
+import findFormForJsonData from '../utils/findFormForJsonData';
 
 export default async function processor() {
   debug(`Processing pokdexes...`);
@@ -17,7 +18,7 @@ export default async function processor() {
       `SELECT *, NationalPokedexNumber 
          FROM Form f 
          JOIN Pokemon p ON f.PokemonId = p.Id
-        WHERE InstanceType <> 3`
+        WHERE InstanceType <> 4` // Exclude megas
     )
     .all();
 
@@ -48,28 +49,13 @@ export default async function processor() {
       continue;
     }
 
-    const data = await readJsonFromFile<PokedexLinkJson[]>(code);
+    const data = await readJsonFromFile<PokedexLinkJson[]>(code, true);
     debug(`Iterating ${code}...`);
 
     data.forEach((d) => {
-      let form = null;
+      const form = findFormForJsonData(forms, d);
 
-      const fs = forms.filter(
-        (x) =>
-          d.nationalPokedexNumber === x.NationalPokedexNumber &&
-          ((d.isVariant && x.InstanceType === FormInstanceType.Variant) ||
-            (!d.isVariant && x.InstanceType !== FormInstanceType.Variant))
-      );
-
-      if (!d.formSuffix) {
-        form = fs.find((x) => x.Description === null);
-      } else {
-        form = fs[Number(d.formSuffix.slice(1))];
-      }
-
-      if (!form) {
-        debug(`Pokemon Json couldn't find a match in Form table.`, data);
-      } else {
+      if (form) {
         pokedexLinks.push({
           PokedexId: dex.Id,
           PokemonFormId: form.Id,
@@ -90,5 +76,15 @@ export default async function processor() {
     }
   });
 
-  insertPokedexForms(pokedexLinks);
+  insertPokedexForms(
+    pokedexLinks.filter(
+      (x, i, a) =>
+        a.findIndex(
+          (y) =>
+            x.PokedexId === y.PokedexId &&
+            x.PokemonFormId === y.PokemonFormId &&
+            x.RegionalPokedexNumber === y.RegionalPokedexNumber
+        ) === i
+    )
+  );
 }

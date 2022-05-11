@@ -14,7 +14,7 @@ import { debug } from './utils/logger';
 async function run() {
   console.log(
     chalk.green(
-      figlet.textSync(`Lusamine Data\r\nExtractor`, {
+      figlet.textSync(`Lusamine Data\r\n\r\nExtractor`, {
         horizontalLayout: 'full',
         width: process.stdout.columns,
         whitespaceBreak: true
