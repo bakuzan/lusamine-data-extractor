@@ -5,9 +5,7 @@ const targetFolder = 'src/database/scripts';
 
 export function readSQLFiles() {
   try {
-    const filenames = fs
-      .readdirSync(targetFolder)
-      .sort((a, b) => b.localeCompare(a));
+    const filenames = fs.readdirSync(targetFolder);
 
     return filenames
       .filter((x) => x.endsWith('sql'))
@@ -17,7 +15,11 @@ export function readSQLFiles() {
           'utf-8'
         );
 
-        return content.toString();
+        return {
+          number: Number(filename.split('.')[0]),
+          name: filename,
+          script: content.toString()
+        };
       });
   } catch (err) {
     console.log(err);
@@ -26,5 +28,5 @@ export function readSQLFiles() {
 }
 
 export default function setupExecution() {
-  return readSQLFiles().join('\r\n');
+  return readSQLFiles().sort((a, b) => a.number - b.number);
 }

@@ -15,7 +15,7 @@ export default async function processor() {
 
   const forms: PokemonFormData[] = db
     .prepare(
-      `SELECT *, NationalPokedexNumber 
+      `SELECT f.*, NationalPokedexNumber 
          FROM Form f 
          JOIN Pokemon p ON f.PokemonId = p.Id
         WHERE InstanceType <> 4` // Exclude megas

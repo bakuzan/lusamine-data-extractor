@@ -1,5 +1,6 @@
 import Database from 'better-sqlite3';
 import dotenv from 'dotenv';
+// import { debug } from '../utils/logger';
 
 import setupExecution from './setup';
 
@@ -11,6 +12,10 @@ if (!process.env.DATABASE_PATH) {
 
 const db = new Database(process.env.DATABASE_PATH, {});
 const scripts = setupExecution();
-db.exec(scripts);
+
+for (const item of scripts) {
+  // debug(`Executing ${item.name}...`);
+  db.exec(item.script);
+}
 
 export default db;
